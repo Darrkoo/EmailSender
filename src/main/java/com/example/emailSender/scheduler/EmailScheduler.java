@@ -11,11 +11,7 @@ public class EmailScheduler {
     @Autowired
     private EmailService emailService;
 
-    // This cron expression triggers the task every minute
-    @Scheduled(cron = "0 * * * * ?")
-    public void scheduleDailyEmails() {
+    @Scheduled(fixedRate = 60000) // Check every minute
+    public void scheduleEmails() {
         emailService.sendScheduledEmails();
-    }
-
-    // Additional schedules for monthly and yearly can be added here
-}
+    }}

@@ -7,19 +7,26 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
+@Table(name = "EMAIL_SCHEDULE")
 public class EmailSchedule {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(updatable = false, nullable = false)
+    @Column(updatable = false, nullable = false, columnDefinition = "RAW")
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "template_id", nullable = false)
-    private EmailTemplate template;
+    @JoinColumn(name = "TEMPLATE_ID", nullable = false)
+    private EmailTemplate emailTemplate;
 
+    @Column(name = "SCHEDULED_TIME", nullable = true)
     private LocalDateTime scheduledTime;
+
+    @Column(name = "STATUS", nullable = true, length = 255)
     private String status;
+
+    @Column(name = "NEXT_SCHEDULED_TIME", nullable = true)
+    private LocalDateTime nextScheduledTime;
 
     // Getters and Setters
 
@@ -32,11 +39,11 @@ public class EmailSchedule {
     }
 
     public EmailTemplate getTemplate() {
-        return template;
+        return emailTemplate;
     }
 
     public void setTemplate(EmailTemplate template) {
-        this.template = template;
+        this.emailTemplate = template;
     }
 
     public LocalDateTime getScheduledTime() {
@@ -53,5 +60,13 @@ public class EmailSchedule {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDateTime getNextScheduledTime() {
+        return nextScheduledTime;
+    }
+
+    public void setNextScheduledTime(LocalDateTime nextScheduledTime) {
+        this.nextScheduledTime = nextScheduledTime;
     }
 }

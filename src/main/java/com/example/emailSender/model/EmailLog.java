@@ -17,10 +17,12 @@ public class EmailLog {
 
     @ManyToOne
     @JoinColumn(name = "template_id", nullable = false)
-    private EmailTemplate template;
+    private EmailTemplate emailTemplate;
 
     private LocalDateTime sentTime;
     private String status;
+
+    private String errorMessage;
 
     public UUID getId() {
         return id;
@@ -30,12 +32,12 @@ public class EmailLog {
         this.id = id;
     }
 
-    public EmailTemplate getTemplate() {
-        return template;
+    public EmailTemplate getEmailTemplate() {
+        return emailTemplate;
     }
 
-    public void setTemplate(EmailTemplate template) {
-        this.template = template;
+    public void setEmailTemplate(EmailTemplate template) {
+        this.emailTemplate = template;
     }
 
     public LocalDateTime getSentTime() {
@@ -52,5 +54,15 @@ public class EmailLog {
 
     public void setStatus(String status) {
         this.status = status;
-    }}
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+}
+
 
